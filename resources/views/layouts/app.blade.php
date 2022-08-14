@@ -27,10 +27,7 @@
     <div id="app">
         <!-- When user is logged -->
         @if(Auth::check())
-
         @include ('layouts.navbar')
-        @include ('layouts.sidebar')
-
         @endif
 
         <!-- Notification if action is OK -->
@@ -43,9 +40,12 @@
         </div>
         @endif
 
-        <main class="py-4 container-lg">
+        <main class="py-4 min-wh-100 min-vh-100">
             @yield('content')
         </main>
+
+        @include ('layouts.footer')
+    
     </div>
 </body>
 
@@ -53,14 +53,17 @@
 
 <script type="text/javascript">
     document.addEventListener("DOMContentLoaded", function(event) {
-        hideAlert();
+        hideAlert(5);
     });
 
-    function hideAlert() {
+    /**
+     * This method hide alert of bootstrap after xxx seconds
+     */
+    function hideAlert(sec) {
         var alert = document.getElementsByClassName('alert')[0];
 
         setTimeout(() => {
             alert.classList.add('d-none');
-        }, 5000)
+        }, sec * 1000)
     }
 </script>

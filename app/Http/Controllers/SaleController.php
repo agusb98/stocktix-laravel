@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
+use App\Models\Sale;
 use Illuminate\Http\Request;
 
 /**
- * Class ProductController
+ * Class SaleController
  * @package App\Http\Controllers
  */
-class ProductController extends Controller
+class SaleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,10 +18,10 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::paginate();
+        $sales = Sale::paginate();
 
-        return view('product.index', compact('products'))
-            ->with('i', (request()->input('page', 1) - 1) * $products->perPage());
+        return view('sale.index', compact('sales'))
+            ->with('i', (request()->input('page', 1) - 1) * $sales->perPage());
     }
 
     /**
@@ -31,8 +31,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $product = new Product();
-        return view('product.create', compact('product'));
+        $sale = new Sale();
+        return view('sale.create', compact('sale'));
     }
 
     /**
@@ -43,12 +43,12 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate(Product::$rules);
+        request()->validate(Sale::$rules);
 
-        $product = Product::create($request->all());
+        $sale = Sale::create($request->all());
 
-        return redirect()->route('product.index')
-            ->with('success', 'Product created successfully.');
+        return redirect()->route('sale.index')
+            ->with('success', 'Sale created successfully.');
     }
 
     /**
@@ -59,9 +59,9 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $product = Product::find($id);
+        $sale = Sale::find($id);
 
-        return view('product.show', compact('product'));
+        return view('sale.show', compact('sale'));
     }
 
     /**
@@ -72,26 +72,26 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $product = Product::find($id);
+        $sale = Sale::find($id);
 
-        return view('product.edit', compact('product'));
+        return view('sale.edit', compact('sale'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  Product $product
+     * @param  Sale $sale
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, Sale $sale)
     {
-        request()->validate(Product::$rules);
+        request()->validate(Sale::$rules);
 
-        $product->update($request->all());
+        $sale->update($request->all());
 
-        return redirect()->route('product.index')
-            ->with('success', 'Product updated successfully');
+        return redirect()->route('sale.index')
+            ->with('success', 'Sale updated successfully');
     }
 
     /**
@@ -101,9 +101,9 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        $product = Product::find($id)->delete();
+        $sale = Sale::find($id)->delete();
 
-        return redirect()->route('product.index')
-            ->with('success', 'Product deleted successfully');
+        return redirect()->route('sale.index')
+            ->with('success', 'Sale deleted successfully');
     }
 }

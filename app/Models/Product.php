@@ -25,11 +25,11 @@ class Product extends Model
 {
 
   static $rules = [
-    'code' => 'required|string|max:100',
-    'name' => 'required|string|max:100',
-    'price' => 'required|int',
-    'quantity' => 'required|int',
-    'status' => 'required|int',
+    'code' => 'required | string | max:100',
+    'name' => 'required | string | max:100',
+    'price' => 'required | int',
+    'quantity' => 'required | int',
+    'status' => 'required | int',
     'observation' => 'max:200',
   ];
 
@@ -40,5 +40,13 @@ class Product extends Model
    *
    * @var array
    */
-  protected $fillable = ['code', 'name', 'price', 'description', 'quantity', 'status', 'observation'];
+  protected $fillable = [
+    'code',
+    'name',
+    'price',
+    'description',
+    'quantity',
+    'status',
+    'observation'
+  ];
 }

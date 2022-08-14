@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Models\Client;
 
 /**
- * Class ProductController
+ * Class ClientController
  * @package App\Http\Controllers
  */
-class ProductController extends Controller
+class ClientController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,10 +18,10 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::paginate();
+        $clients = Client::paginate();
 
-        return view('product.index', compact('products'))
-            ->with('i', (request()->input('page', 1) - 1) * $products->perPage());
+        return view('client.index', compact('clients'))
+            ->with('i', (request()->input('page', 1) - 1) * $clients->perPage());
     }
 
     /**
@@ -31,8 +31,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $product = new Product();
-        return view('product.create', compact('product'));
+        $client = new Client();
+        return view('client.create', compact('client'));
     }
 
     /**
@@ -43,12 +43,12 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate(Product::$rules);
+        request()->validate(Client::$rules);
 
-        $product = Product::create($request->all());
+        $client = Client::create($request->all());
 
-        return redirect()->route('product.index')
-            ->with('success', 'Product created successfully.');
+        return redirect()->route('client.index')
+            ->with('success', 'Client created successfully.');
     }
 
     /**
@@ -59,9 +59,9 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $product = Product::find($id);
+        $client = Client::find($id);
 
-        return view('product.show', compact('product'));
+        return view('client.show', compact('client'));
     }
 
     /**
@@ -72,26 +72,26 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $product = Product::find($id);
+        $client = Client::find($id);
 
-        return view('product.edit', compact('product'));
+        return view('client.edit', compact('client'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  Product $product
+     * @param  Client $client
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, Client $client)
     {
-        request()->validate(Product::$rules);
+        request()->validate(Client::$rules);
 
-        $product->update($request->all());
+        $client->update($request->all());
 
-        return redirect()->route('product.index')
-            ->with('success', 'Product updated successfully');
+        return redirect()->route('client.index')
+            ->with('success', 'Client updated successfully');
     }
 
     /**
@@ -101,9 +101,9 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        $product = Product::find($id)->delete();
+        $client = Client::find($id)->delete();
 
-        return redirect()->route('product.index')
-            ->with('success', 'Product deleted successfully');
+        return redirect()->route('client.index')
+            ->with('success', 'Client deleted successfully');
     }
 }

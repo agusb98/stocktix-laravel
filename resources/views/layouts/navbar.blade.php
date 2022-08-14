@@ -1,5 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-    <div class="container-xxl">
+<nav class="navbar navbar-expand-md bg-success shadow-sm">
         <a class="navbar-brand ms-5" href="{{ url('/') }}">
             {{ config('app.name', 'Laravel') }}
         </a>
@@ -48,5 +47,4 @@
                 @endguest
             </ul>
         </div>
-    </div>
 </nav>
